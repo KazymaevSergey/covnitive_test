@@ -245,7 +245,7 @@ def result():
         damage=y_pred_dam
         massiv=[age]+ACE_db+[stepen,damage, diagnos]+[assmet_cat, assement_dam]
        
-        creat_tab()
+        #creat_tab()
         insert_tab(massiv)
                                            
        

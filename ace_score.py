@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 from predict_clf import Predict_ace
-from data_db import insert_tab, creat_tab
+from data_db_v2 import insert_tab
 
 
 
@@ -245,7 +245,7 @@ def result():
         damage=y_pred_dam
         massiv=[age]+ACE_db+[stepen,damage, diagnos]+[assmet_cat, assement_dam]
        
-        creat_tab()
+        
         insert_tab(massiv)
                                            
        

@@ -116,7 +116,7 @@ def input_data():
     
         spatial_cub=st.selectbox("Копирование куба", [0,1,2])
     
-        spatial_clock=st.selectbox("Тест часов",[1,2,3,4,5])
+        spatial_clock=st.selectbox("Тест часов",[0,1,2,3,4,5])
    
         spatial_punct=st.selectbox("Подсчет точек", [0,1,2,3,4])
     

@@ -116,7 +116,7 @@ def input_data():
     
         spatial_cub=st.selectbox("Копирование куба", [0,1,2])
     
-        spatial_clock=st.selectbox("Тест часов",[1,2,3,4,5])
+        spatial_clock=st.selectbox("Тест часов",[0,1,2,3,4,5])
    
         spatial_punct=st.selectbox("Подсчет точек", [0,1,2,3,4])
     
@@ -239,7 +239,13 @@ def result():
        
         #creat_tab()
         
-        insert_tab(massiv)
+        try:
+            insert_tab(massiv)
+        except:
+            insert_tab(massiv)
+            
+        
+       
                                            
        
     
@@ -326,7 +332,7 @@ if st.session_state.clicked:
     cater=['нет ответа']+classes
     assmet_cat=st.radio('согласны?', ['нет ответа','да', 'нет'], key=1, index=0)
     if assmet_cat=='нет':
-        assmet_cat=st.selectbox('что подходит лучше', mas, index=0)
+            assmet_cat=st.selectbox('что подходит лучше', mas, index=0)
 
 
 #оценка наличия повреждения

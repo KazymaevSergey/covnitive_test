@@ -13,163 +13,134 @@ st.write('Введите данные')
 
 #ввод данных теста
 def input_data():
-    age=st.number_input("Возраст", step=1)
-   
     
-    diag=['нет ответа','нет_повреждений',"mci",'dementia','stroke', 'parkinson','barain_injury','другое']
-    diagnos = st.radio(
+    
+    age=st.number_input("Введите возраст, он должен быть не менее 18 лет", step=1)
+    if age<18:
+        
+        
+        return age
+        
+    else:
+           
+
+        diag=['нет ответа','нет_повреждений',"mci",'dementia','stroke', 'parkinson','barain_injury','другое']
+        diagnos = st.radio(
         "выберите повреждения мозга",
         diag, index=0
         )
 
 #ВНИМАНИЕ
 
-    st.header('Внимание', divider='rainbow')
-    with st.container(border=True):
+        st.header('Внимание', divider='rainbow')
+        with st.container(border=True):
         
-        at_time=st.selectbox("Внимание: ориентирование во времени",[0,1,2,3,4,5])
+            at_time=st.selectbox("Внимание: ориентирование во времени",[0,1,2,3,4,5])
    
     
    
-        at_place=st.selectbox("Внимание: ориентирование в месте", [0,1,2,3,4,5])
+            at_place=st.selectbox("Внимание: ориентирование в месте", [0,1,2,3,4,5])
     
 
-        at_three_words=st.selectbox("Внимание: повторить 3 слова и запомнить", [0,1,2,3])
-    
-
-
-        at_calculate=st.selectbox("Внимание: серийный счет от 100 отнимать по 7", [0,1,2,3,4,5])
+            at_three_words=st.selectbox("Внимание: повторить 3 слова и запомнить", [0,1,2,3])
     
 
 
-        attantion=at_time+at_place+at_three_words+at_calculate
+            at_calculate=st.selectbox("Внимание: серийный счет от 100 отнимать по 7", [0,1,2,3,4,5])
+    
 
-        st.subheader('Общий балл по вниманию', divider='blue')
-        st.write(attantion)
+
+            attantion=at_time+at_place+at_three_words+at_calculate
+
+            st.subheader('Общий балл по вниманию', divider='blue')
+            st.write(attantion)
 
 
 #ПАМЯТЬ
-    st.header('Память', divider='rainbow')
+        st.header('Память', divider='rainbow')
     
-    with st.container(border=True):
-        mem_words=st.selectbox("Память: Припомнить 3 слова", [0,1,2,3])
+        with st.container(border=True):
+            mem_words=st.selectbox("Память: Припомнить 3 слова", [0,1,2,3])
     
-        mem_adr=st.selectbox("Память: Запомнить адресс", [0,1,2,3,4,5,6,7])
+            mem_adr=st.selectbox("Память: Запомнить адресс", [0,1,2,3,4,5,6,7])
     
-        mem_president=st.selectbox("Память на президента, премьер-министра и т.д", [0,1,2,3,4])
+            mem_president=st.selectbox("Память на президента, премьер-министра и т.д", [0,1,2,3,4])
     
-        mem__remember_adr=st.selectbox("Память: свободное припоминание адреса", [0,1,2,3,4,5,6,7])
+            mem__remember_adr=st.selectbox("Память: свободное припоминание адреса", [0,1,2,3,4,5,6,7])
     
-        mem_uznav=st.selectbox("Память: выбор из множества", [0,1,2,3,4,5])
+            mem_uznav=st.selectbox("Память: выбор из множества", [0,1,2,3,4,5])
     
-        memory=mem_words+mem_adr+mem_president+mem__remember_adr+mem_uznav
-        st.subheader('Общий балл по памяти', divider='blue')
-        st.write(memory)
+            memory=mem_words+mem_adr+mem_president+mem__remember_adr+mem_uznav
+            st.subheader('Общий балл по памяти', divider='blue')
+            st.write(memory)
 
 
 
 #БЕГЛОСТЬ
-    st.header('Скорость вербальных ассоциаций', divider='rainbow')
-    with st.container(border=True):
+        st.header('Скорость вербальных ассоциаций', divider='rainbow')
+        with st.container(border=True):
 
-        word_fluence=st.selectbox("Называние за 1 минуту слов на букву", [0,1,2,3,4,5,6,7])
+            word_fluence=st.selectbox("Называние за 1 минуту слов на букву", [0,1,2,3,4,5,6,7])
     
 
-        word_animal=st.selectbox("Называние за  1 минуту животных", [0,1,2,3,4,5,6,7])
+            word_animal=st.selectbox("Называние за  1 минуту животных", [0,1,2,3,4,5,6,7])
     
 
-        fluence=word_fluence+word_animal
-        st.subheader('Общий балл по скорости словесных ассоциаций', divider='blue')
-        st.write(fluence)
+            fluence=word_fluence+word_animal
+            st.subheader('Общий балл по скорости словесных ассоциаций', divider='blue')
+            st.write(fluence)
 
 
 #РЕЧЬ
-    st.header('Речь', divider='rainbow')
-    with st.container(border=True):
+        st.header('Речь', divider='rainbow')
+        with st.container(border=True):
 
-        speech_komand=st.selectbox("Речь: команды", [0,1,2,3])
+            speech_komand=st.selectbox("Речь: команды", [0,1,2,3])
     
-        speech_sentense=st.selectbox("Речь: написание предложений", [0,1,2])
+            speech_sentense=st.selectbox("Речь: написание предложений", [0,1,2])
     
-        speech_repit_word=st.selectbox("Речь: повторение слов", [0,1,2])
+            speech_repit_word=st.selectbox("Речь: повторение слов", [0,1,2])
    
-        speech_repit_poslov_1=st.selectbox("Речь: повторение 1 пословицы",[0,1])
+            speech_repit_poslov_1=st.selectbox("Речь: повторение 1 пословицы",[0,1])
     
-        speech_repit_poslov_2=st.selectbox("Речь: повторение  2 пословицы", [0,1])
+            speech_repit_poslov_2=st.selectbox("Речь: повторение  2 пословицы", [0,1])
     
-        speech_name=  st.selectbox("Речь: название", [0,1,2,3,4,5,6,7,8,9,10,11,12])
+            speech_name=  st.selectbox("Речь: название", [0,1,2,3,4,5,6,7,8,9,10,11,12])
     
 
-        speech_undestand=st.selectbox("Речь: понимание",[0,1,2,3,4])
+            speech_undestand=st.selectbox("Речь: понимание",[0,1,2,3,4])
         
-        speech_read=st.selectbox("Речь: чтение", [0,1])
+            speech_read=st.selectbox("Речь: чтение", [0,1])
     
 
-        speech=speech_komand+speech_sentense+speech_repit_word+speech_repit_poslov_1+speech_repit_poslov_2+speech_read+speech_name+speech_undestand
-        st.subheader('Общий балл речь', divider='blue')
-        st.write(speech)
+            speech=speech_komand+speech_sentense+speech_repit_word+speech_repit_poslov_1+speech_repit_poslov_2+speech_read+speech_name+speech_undestand
+            st.subheader('Общий балл речь', divider='blue')
+            st.write(speech)
 
 #Зрительно-пространственные функции
-    st.header('Зрительно-пространственные функции', divider='rainbow')
-    with st.container(border=True):
-        spatial_endless=st.selectbox("Копирование бесконечностей",[0,1])
+        st.header('Зрительно-пространственные функции', divider='rainbow')
+        with st.container(border=True):
+            spatial_endless=st.selectbox("Копирование бесконечностей",[0,1])
     
-        spatial_cub=st.selectbox("Копирование куба", [0,1,2])
+            spatial_cub=st.selectbox("Копирование куба", [0,1,2])
     
-        spatial_clock=st.selectbox("Тест часов",[0,1,2,3,4,5])
+            spatial_clock=st.selectbox("Тест часов",[0,1,2,3,4,5])
    
-        spatial_punct=st.selectbox("Подсчет точек", [0,1,2,3,4])
+            spatial_punct=st.selectbox("Подсчет точек", [0,1,2,3,4])
     
-        spatial_albabet=st.selectbox("Подсчет букв", [0,1,2,3,4])
+            spatial_albabet=st.selectbox("Подсчет букв", [0,1,2,3,4])
     
-        spatial=spatial_endless+spatial_cub+spatial_clock+spatial_punct+spatial_albabet
+            spatial=spatial_endless+spatial_cub+spatial_clock+spatial_punct+spatial_albabet
 
-        st.subheader('Общий балл по зрительно-пространственным функциям', divider='blue')
-        st.write(spatial)
+            st.subheader('Общий балл по зрительно-пространственным функциям', divider='blue')
+            st.write(spatial)
 
 
 #СВЕДЕНИЕ В ОБЩЕЕ
-    ACE=attantion+memory+fluence+speech+spatial
-    m_ACE=m_ACE=at_time-1+word_animal+mem_adr+spatial_clock+mem__remember_adr
+        ACE=attantion+memory+fluence+speech+spatial
+        m_ACE=m_ACE=at_time-1+word_animal+mem_adr+spatial_clock+mem__remember_adr
     
-    return m_ACE, ACE, attantion, memory, fluence, speech, spatial, age, diagnos
-
-m_ACE, ACE, attantion, memory, fluence, speech, spatial, age,  diagnos=input_data()
-
-dic={'m-ACE':m_ACE,
-    'ACE-III':ACE,
-    'ВНИМАНИЕ':attantion,
-     'ПАМЯТЬ':memory, 
-     'БЕГЛОСТЬ':fluence, 
-     'РЕЧЬ':speech, 
-     'Зрительно-пространственные функции':spatial, 
-     'Возраст':age 
-     }
-df=pd.DataFrame(dic, index=['Значение'])
-
-
-
-#загрузка моделей предсказания
-
-ACE_III=[m_ACE, ACE, attantion,memory,fluence, speech, spatial, age] #данные на основе которых строится предсказание
-
-
-model_cat=Predict_ace('data/cat_category')
-model_dam=Predict_ace('data/cat_dam')
-
-y_pred_cat=model_cat.predict(ACE_III)[0][0]
-y_pred_cat_proba=model_cat.predict_proba(ACE_III).max().round(2)
-
-p_value=model_cat.predict_proba(ACE_III).round(2)
-classes=model_cat.clf_classes()
-data_graf_cat=dict(zip(classes, p_value[0]))
-
-#степени повреждения мозга
-y_pred_dam=model_dam.predict(ACE_III)[0]
-y_pred_dam_proba=model_dam.predict_proba(ACE_III).max().round(2)
-
-
-
+        return m_ACE, ACE, attantion, memory, fluence, speech, spatial, age, diagnos
 
 #Функция вывода результатов
 def result():
@@ -244,10 +215,7 @@ def result():
         except:
             insert_tab(massiv)
             
-        
-       
-                                           
-       
+            
     
 #функция предсказания
 def predict():
@@ -266,7 +234,7 @@ def predict():
     #предсказание степени выраженности нарушений
     
     
-    st.subheader('Предсказание степени выраженности нарушений', divider='blue')
+    st.subheader('Предсказание степени выраженности нарушений', divider='orange')
     if y_pred_cat=='незначительные' or y_pred_cat=='умеренные' :
         st.write('степень нарушения когнитивных функций: ', y_pred_cat)
         st.write('Вероятность достоверности прогноза: ', y_pred_cat_proba*100)
@@ -287,7 +255,7 @@ def predict():
     st.plotly_chart(fig3, use_container_width=True)
     
 
-#степени повреждения мозга
+#повреждения мозга
     st.subheader('Предсказание наличия повреждения мозга', divider='blue')
     
     if y_pred_dam=='damage':
@@ -297,57 +265,140 @@ def predict():
     elif y_pred_dam=='no_dam':
         st.write('отсутсутсвует органическое повреждение мозга')
         st.write('Вероятность достоверности прогноза:   ', y_pred_dam_proba*100)
+        
+#предсказание диагноза
+    st.subheader('Если у пациента подозрение на нейродегенеративные нарушения', divider='green')
+    
+    if y_pred_diag=='normal':
+        st.write('вероятность нейродегенеративных нарушений низкая')
+        st.write('Вероятность достоверности прогноза:   ', y_pred_diag_proba*100)
+    elif y_pred_diag=='mci':
+        st.warning('''вероятно у пациента имеется когнитивное снижение, но оно не достигает деменции, 
+                   но есть риск развития, проведите повторное исследование через 3 месяца''')
+        st.write('Вероятность достоверности прогноза:   ', y_pred_diag_proba*100)
+    elif y_pred_diag=='parkinson':
+        st.warning('нейрокогнитивный профиль типичен для пациентов с Болезнью Паркинсона')
+        st.write('Вероятность достоверности прогноза:   ', y_pred_diag_proba*100)
+    elif y_pred_diag=='dementia':
+        st.error('У пациента когнитивные нарушения соответствующие деменции')
+        st.write('Вероятность достоверности прогноза:   ', y_pred_diag_proba*100)
+        
+  
+    
+    
 
     
 
 #основная программа
-#_____________________________________________#
+#**************************************************
+#***************************************************
 
-st.header('РЕЗУЛТАТЫ', divider='rainbow')
+try:
+    m_ACE, ACE, attantion, memory, fluence, speech, spatial, age,  diagnos=input_data()
+
+
+    dic={'m-ACE':m_ACE,
+    'ACE-III':ACE,
+    'ВНИМАНИЕ':attantion,
+     'ПАМЯТЬ':memory, 
+     'БЕГЛОСТЬ':fluence, 
+     'РЕЧЬ':speech, 
+     'Зрительно-пространственные функции':spatial, 
+     'Возраст':age 
+     }
+    df=pd.DataFrame(dic, index=['Значение'])
+
+
+
+#загрузка моделей предсказания
+
+ #данные на основе которых строится предсказание
+    ACE_III=np.array([m_ACE, ACE, attantion, memory, fluence, speech, spatial, age])
+
+    model_cat=Predict_ace('data/svm_stepen.sav')
+    model_dam=Predict_ace('data/svm_damag.sav')
+    model_diag=Predict_ace('data/svm_diagnos.sav')
+    
+    #степень повреждения
+
+    y_pred_cat=model_cat.predict(ACE_III)[0]
+    y_pred_cat_proba=model_cat.predict_proba(ACE_III).max().round(2)
+
+    p_value=model_cat.predict_proba(ACE_III).round(2)
+    classes=model_cat.clf_classes()
+    data_graf_cat=dict(zip(classes, p_value[0]))
+
+#органическое ли?
+    y_pred_dam=model_dam.predict(ACE_III)[0]
+    y_pred_dam_proba=model_dam.predict_proba(ACE_III).max().round(2)
+    
+#диагноз
+    y_pred_diag=model_diag.predict(ACE_III)[0]
+    y_pred_diag_proba=model_diag.predict_proba(ACE_III).max().round(2)  
+    
+   
+
+   
+    st.header('РЕЗУЛТАТЫ', divider='rainbow')
 
 #1
 #_Управление кнопкой чтоб результаты не сбрасывались___________________
-if 'clicked' not in st.session_state:
-    st.session_state.clicked = False
+    if 'clicked' not in st.session_state:
+        st.session_state.clicked = False
 
-def click_button():
-    st.session_state.clicked = True
+    def click_button():
+        st.session_state.clicked = True
 
 
 #______________________________________________
 
 #2
-st.button('Нажмите для получения рекомендаций по интерпретации', on_click=click_button)
-if st.session_state.clicked:
-    predict() # - выводит рекомендации по интерпритации
+    st.button('Нажмите для получения рекомендаций по интерпретации', on_click=click_button)
+    if st.session_state.clicked:
+        predict() # - выводит рекомендации по интерпритации
     
     #оценка степени выраженности
-    st.header('Оцените результаты прогноза')
-    st.subheader('Оцените результаты степени выраженности', divider='blue')
+        st.header('Оцените результаты прогноза')
+        st.subheader('Оцените результаты степени выраженности', divider='orange')
 
 # Объединяем два массива
-    arr1 = np.array(['нет ответа'])
-    mas = np.append(arr1, classes)
+        arr1 = np.array(['нет ответа'])
+        mas = np.append(arr1, classes)
 
-    cater=['нет ответа']+classes
-    assmet_cat=st.radio('согласны?', ['нет ответа','да', 'нет'], key=1, index=0)
-    if assmet_cat=='нет':
+        cater=['нет ответа']+classes
+        assmet_cat=st.radio('согласны?', ['нет ответа','да', 'нет'], key=1, index=0)
+        if assmet_cat=='нет':
             assmet_cat=st.selectbox('что подходит лучше', mas, index=0)
 
 
 #оценка наличия повреждения
-    st.subheader('Оцените результаты наличия повреждения мозга', divider='blue')
-    assement_dam=st.radio('согласны?',  ['нет ответа','да',  'нет'], key=2, index=0)
-    if assement_dam=='нет':
-        assement_dam=st.selectbox('что подходит лучше', ['нет ответа','есть повреждение мозга', 'нет повреждения мозга'],index=0)
-    
-    result()
+        st.subheader('Оцените результаты наличия повреждения мозга', divider='blue')
+        assement_dam=st.radio('согласны?',  ['нет ответа','да',  'нет'], key=2, index=0)
+        if assement_dam=='нет':
+            assement_dam=st.selectbox('что подходит лучше', ['нет ответа','есть повреждение мозга', 'нет повреждения мозга'],index=0)
+
+#оценка диагноза
+        st.subheader('Оцените результаты предсказания деменции', divider='green')
+        assement_dig=st.radio('согласны?',  ['нет ответа','да',  'нет'], key=3, index=0)
+        if assement_dig=='нет':
+            assement_dig=st.selectbox('что подходит лучше', ['нет ответа','нет нарушений', 
+                                                             'Болезнь Паркинсона',
+                                                             'Умеренные когнитивные нарушения (MCI)',
+                                                             'Деменция',
+                                                             'Другое'],index=0)
+        
+        result()
+
+
+
+
+
+except TypeError:
+     st.error('Введите возраст. Он должен быть не менее 18 лет')
 
     
         
     
-
-
 
 
 

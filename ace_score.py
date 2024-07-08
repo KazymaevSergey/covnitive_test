@@ -231,15 +231,18 @@ def predict():
     else:
         st.write('ACE-III= ',ACE)
         st.write('m-ACE= ',m_ACE)
-        
     #предсказание степени выраженности нарушений
-       
-    st.subheader('Предсказание степени выраженности нарушений', divider='orange')
     
-    st.write('степень нарушения когнитивных функций: ', y_pred_cat)
-    st.write('Вероятность достоверности прогноза: ', y_pred_cat_proba*100)
-             
-    st.header('График достоверности прогноза', divider='red')
+    
+    st.subheader('Предсказание степени выраженности нарушений', divider='orange')
+    if y_pred_cat=='незначительные' or y_pred_cat=='умеренные' :
+        st.write('степень нарушения когнитивных функций: ', y_pred_cat)
+        st.write('Вероятность достоверности прогноза: ', y_pred_cat_proba*100)
+    else:
+        st.warning('степень нарушения когнитивных функций: '+str(y_pred_cat))
+        st.write('Вероятность достоверности прогноза: ', y_pred_cat_proba*100)
+         
+        st.header('График достоверности прогноза', divider='red')
 
    
     fig3=px.bar(y=data_graf_cat.keys(), 

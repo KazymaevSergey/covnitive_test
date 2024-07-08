@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
-from predict_clf import Predict_ace
+from predict_clf import Predict_ace_cat, Predict_ace_svm
 from data_db import insert_tab
 
 
@@ -231,18 +231,15 @@ def predict():
     else:
         st.write('ACE-III= ',ACE)
         st.write('m-ACE= ',m_ACE)
+        
     #предсказание степени выраженности нарушений
-    
-    
+       
     st.subheader('Предсказание степени выраженности нарушений', divider='orange')
-    if y_pred_cat=='незначительные' or y_pred_cat=='умеренные' :
-        st.write('степень нарушения когнитивных функций: ', y_pred_cat)
-        st.write('Вероятность достоверности прогноза: ', y_pred_cat_proba*100)
-    else:
-        st.warning('степень нарушения когнитивных функций: '+str(y_pred_cat))
-        st.write('Вероятность достоверности прогноза: ', y_pred_cat_proba*100)
-         
-        st.header('График достоверности прогноза', divider='red')
+    
+    st.write('степень нарушения когнитивных функций: ', y_pred_cat)
+    st.write('Вероятность достоверности прогноза: ', y_pred_cat_proba*100)
+             
+    st.header('График достоверности прогноза', divider='red')
 
    
     fig3=px.bar(y=data_graf_cat.keys(), 
@@ -313,11 +310,14 @@ try:
 #загрузка моделей предсказания
 
  #данные на основе которых строится предсказание
-    ACE_III=np.array([m_ACE, ACE, attantion, memory, fluence, speech, spatial, age])
+    #ACE_III=np.array([m_ACE, ACE, attantion, memory, fluence, speech, spatial, age])
+ #вариант с другими признаками
+    ACE_III=np.array([ACE, attantion, memory, fluence, speech, spatial, age])
+    
 
-    model_cat=Predict_ace('data/svm_stepen.sav')
-    model_dam=Predict_ace('data/svm_damag.sav')
-    model_diag=Predict_ace('data/svm_diagnos.sav')
+    model_cat=Predict_ace_svm('data/svm_stepen.sav')
+    model_dam=Predict_ace_cat('data/cat_damage')
+    model_diag=Predict_ace_svm('data/svm_diagnos.sav')
     
     #степень повреждения
 

@@ -10,7 +10,7 @@ class Predict_ace_cat():
         self.clf = CatBoostClassifier().load_model(model_catboost)  #загрузка сохраненно     модели
 
     def predict(self, sample):
-        return self.clf.predict([sample])
+        return self.clf.predict(sample)
     
     def predict_proba(self, sample): 
         return self.clf.predict_proba([sample])

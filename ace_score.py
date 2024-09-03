@@ -236,7 +236,7 @@ def predict():
     
     st.subheader('Предсказание степени выраженности нарушений', divider='orange')
     if y_pred_cat=='незначительные' or y_pred_cat=='умеренные' :
-        st.write('степень нарушения когнитивных функций: ', y_pred_cat)
+        st.write('степень нарушения когнитивных функций: '+ str(y_pred_cat))
         st.write('Вероятность достоверности прогноза: ', y_pred_cat_proba*100)
     else:
         st.warning('степень нарушения когнитивных функций: '+str(y_pred_cat))
@@ -318,9 +318,13 @@ try:
     ACE_III=np.array([ACE, attantion, memory, fluence, speech, spatial, age])
     
 
-    model_cat=Predict_ace_svm('data/svm_stepen.sav')
-    model_dam=Predict_ace_cat('data/cat_damage')
-    model_diag=Predict_ace_svm('data/svm_diagnos.sav')
+    #model_cat=Predict_ace_svm('data/svm_stepen.sav')
+    #model_dam=Predict_ace_cat('data/cat_damage')
+    #model_diag=Predict_ace_svm('data/svm_diagnos.sav')
+    
+    model_cat=Predict_ace_cat('data/cat_stepen_gener')
+    model_dam=Predict_ace_svm('data/svm_damag_gener.sav')
+    model_diag=Predict_ace_cat('data/cat_diag_gener')
     
     #степень повреждения
 

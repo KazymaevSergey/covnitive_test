@@ -4,6 +4,7 @@ import numpy as np
 import plotly.express as px
 from predict_clf import Predict_ace_cat, Predict_ace_svm
 from data_db import insert_tab
+from anomal_predict import plot_neurocog
 
 
 
@@ -141,8 +142,10 @@ def input_data():
 #СВЕДЕНИЕ В ОБЩЕЕ
         ACE=attantion+memory+fluence+speech+spatial
         m_ACE=m_ACE=at_time-1+word_animal+mem_adr+spatial_clock+mem__remember_adr
+        ACE_anomal=np.array([attantion, memory, fluence, speech, spatial])
+        
     
-        return m_ACE, ACE, attantion, memory, fluence, speech, spatial, age, diagnos
+        return m_ACE, ACE, attantion, memory, fluence, speech, spatial, age, diagnos, ACE_anomal
 
 #Функция вывода результатов
 def result():
@@ -191,18 +194,21 @@ def result():
         fig1.add_vline(x=82, line_width=5, line_dash="dash", line_color="red")
         fig1.add_vline(x=27, line_width=5, line_dash="dash", line_color="yellow")
 
-        df_procent=((df[df.columns[2:7]]/[18,26,14,26,16])*100).T.round(2) #датафрейм для процентного представления потери баллов
+        #df_procent=((df[df.columns[2:7]]/[18,26,14,26,16])*100).T.round(2) #датафрейм для процентного представления потери баллов
 
 
-#2
-        fig2=px.bar(df_procent, text=df_procent['Значение'].values,
-            orientation='h', 
-            labels={'index':'функция', 'value':'процент сохранности функции от максимального значения'},
-            title='Адденбрукская когнитивная шкала-III.'+' Возраст: '+str(age),
-            )
+#2      
+       
+        fg2=plot_neurocog(ACE_anomal, y_pred_dam, age, ACE)
+        
+        #=px.bar(df_procent, text=df_procent['Значение'].values,
+            #orientation='h', 
+            #labels={'index':'функция', 'value':'процент сохранности функции от максимального значения'},
+            #title='Адденбрукская когнитивная шкала-III.'+' Возраст: '+str(age),
+            #)
 
         st.plotly_chart(fig1, use_container_width=True)
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fg2, use_container_width=True)
         
         #Массив для записи в базу данных
         ACE_db=[m_ACE, ACE, attantion, memory,fluence, speech, spatial]
@@ -247,14 +253,14 @@ def predict():
         st.header('График достоверности прогноза', divider='red')
 
    
-    fig3=px.bar(y=data_graf_cat.keys(), 
-            x= data_graf_cat.values(),
-            orientation='h',
-            text=data_graf_cat.values(),
-            labels={'y':'категория',  'x':'вероятность'},
+    #fig3=px.bar(y=data_graf_cat.keys(), 
+    #        x= data_graf_cat.values(),
+    #        orientation='h',
+    #        text=data_graf_cat.values(),
+    #        labels={'y':'категория',  'x':'вероятность'},
              
-                       )
-    st.plotly_chart(fig3, use_container_width=True)
+    #                   )
+    #st.plotly_chart(fig3, use_container_width=True)
     
 
 #повреждения мозга
@@ -296,7 +302,7 @@ def predict():
 #***************************************************
 
 try:
-    m_ACE, ACE, attantion, memory, fluence, speech, spatial, age,  diagnos=input_data()
+    m_ACE, ACE, attantion, memory, fluence, speech, spatial, age,  diagnos, ACE_anomal=input_data()
 
 
     dic={'m-ACE':m_ACE,

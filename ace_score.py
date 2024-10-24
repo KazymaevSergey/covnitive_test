@@ -160,6 +160,7 @@ def result():
         container = st.container(border=True)
         container.write(text_conc)
         
+        
         st.subheader('Сводная таблица', divider='blue')
               #Вывод общих сведений
         

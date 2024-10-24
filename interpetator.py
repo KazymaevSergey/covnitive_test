@@ -1,6 +1,6 @@
 from yandex_cloud_ml_sdk import YCloudML
 import streamlit as st
-from anomal_predict import predict_anomal, pred_fluense, color
+from anomal_predict import predict_anomal, pred_fluense
 import numpy as np
 
 flod_id=st.secrets.yandexGPT.fold_id
@@ -9,7 +9,7 @@ key_api=st.secrets.yandexGPT.openai_key
 sdk = YCloudML(folder_id=flod_id, auth=key_api)
 
 model = sdk.models.completions('yandexgpt')
-model = model.configure(temperature=0.2)
+model = model.configure(temperature=0.4)
 
 columns_anomal=['ВНИМАНИЕ', 'ПАМЯТЬ', 'БЕГЛОСТЬ', 'РЕЧЬ', 'ЗРИТЕЛЬНО_ПРОСТРАНСТВЕННЫЕ']
 
@@ -52,9 +52,9 @@ def func_text(ACE_anomal):
 
 
 def damage(val_damage):
-    if val_damage=='no_damage':
+    if val_damage=='no_dam':
         pred_dam='не органического характера'
-    else:
+    elif val_damage=='damage':
         pred_dam='повреждение мозга'
     return pred_dam
 

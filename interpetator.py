@@ -53,9 +53,9 @@ def func_text(ACE_anomal):
 
 def damage(val_damage):
     if val_damage=='no_dam':
-        pred_dam='не органического характера'
+        pred_dam=' причина не органического характера'
     elif val_damage=='damage':
-        pred_dam='повреждение мозга'
+        pred_dam=' причина органического характера'
     return pred_dam
 
 

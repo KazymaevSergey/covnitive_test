@@ -42,13 +42,19 @@ def function_interpetator(ACE_anomal):
 
 
 def func_text(ACE_anomal):
-    func_inter=[]
+    func_inter_norm=[]
+    func_inter_diserd=[]
     cognitive=function_interpetator(ACE_anomal)
     for cog, inter, ace_val, ace_max in zip(cognitive.keys(), cognitive.values(), ACE_anomal, absolut):
         
-        interet=cog+' '+inter+': '+str(ace_val)+' балл из '+str(ace_max)
-        func_inter.append(interet)
-    return func_inter
+        if inter=='норма':
+          interet=cog+' '+inter+': '+str(ace_val)+' балл из '+str(ace_max)
+          func_inter_norm.append(interet)
+          
+        if inter=='нарушение':
+          interet=cog+' '+inter+': '+str(ace_val)+' балл из '+str(ace_max)
+          func_inter_diserd.append(interet)
+    return func_inter_norm, func_inter_diserd
 
 
 def damage(val_damage):
@@ -67,10 +73,14 @@ def damage(val_damage):
 def text_conclusion(step_pred, y_dam, ACE_anomal, ACE):
     
     pred_dam=damage(y_dam)
-    func_inter=func_text(ACE_anomal)
+    func_inter_norm, func_inter_diserd=func_text(ACE_anomal)
     
-    input_text='''напиши нейропсихологическое заключение короткое  когнитивных нарушени {}, {}, когнитивные функции {}, 
-                Общий балл по Адденбруской когнитивной шкале {} из 100'''.format(step_pred, pred_dam, func_inter, ACE)
+    input_text='''напиши нейропсихологическое заключение короткое  когнитивных нарушени {}, {}, 
+                нарушены когнитивные функции {}, при этом сохранны {}
+                Общий балл по Адденбруской когнитивной шкале {} из 100'''.format(step_pred, 
+                                                                                 pred_dam, 
+                                                                                 func_inter_diserd, 
+                                                                                 func_inter_norm, ACE)
     result=model.run(input_text)
     
     return result[0].text

@@ -4,15 +4,17 @@ import numpy as np
 
 
 columns_anomal=['ВНИМАНИЕ', 'ПАМЯТЬ', 'БЕГЛОСТЬ', 'РЕЧЬ', 'ЗРИТЕЛЬНО_ПРОСТРАНСТВЕННЫЕ']
-dict_anomal_clf={}
-for name in columns_anomal:
+def dict_anomal_clf():
+  k={}
+  for name in columns_anomal:
     clf=joblib.load(f'clf_anomal/{name}.pkl') 
   
-    dict_anomal_clf[name]=clf
+    k[name]=clf
+  return k
     
 
 def predict_anomal(cognitive_name, val):
-  pred=dict_anomal_clf.get(cognitive_name).predict([[val]])
+  pred=dict_anomal_clf().get(cognitive_name).predict([[val]])
   pred[pred==1]=0
   pred[pred==-1]=1
 
@@ -105,5 +107,8 @@ def plot_neurocog(ACE_anomal, interpretir, age, ACE):
   
   
   return fig
+
+
+
 
 

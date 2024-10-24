@@ -5,6 +5,7 @@ import plotly.express as px
 from predict_clf import Predict_ace_cat, Predict_ace_svm
 from data_db import insert_tab
 from anomal_predict import plot_neurocog
+from interpetator import text_conclusion
 
 
 
@@ -151,8 +152,18 @@ def input_data():
 def result():
     st.subheader('нажмите на кнопку для получения результатов и сводную талицу')
     if st.button("Нажимая на кнопку ниже вы даете согласие на сбор и обработку обезличенных данных теста для улучшения рекомендаций", type='primary'):
+        
+        st.subheader('Описание результатов')
+        st.warning('заключение создано при помощи нейросети, возможны неточности', icon='⚠️')
+        
+        text_conc=text_conclusion(y_pred_cat, y_pred_dam,  ACE_anomal, ACE)
+        container = st.container(border=True)
+        container.write(text_conc)
+        
         st.subheader('Сводная таблица', divider='blue')
               #Вывод общих сведений
+        
+        
               
         if y_pred_dam=='damage':
             dam='повреждение мозга'
@@ -275,21 +286,21 @@ def predict():
         st.write('Вероятность достоверности прогноза:   ', y_pred_dam_proba*100)
         
 #предсказание диагноза
-    st.subheader('Если у пациента подозрение на нейродегенеративные нарушения', divider='green')
+    #st.subheader('Если у пациента подозрение на нейродегенеративные нарушения', divider='green')
     
-    if y_pred_diag=='normal':
-        st.write('вероятность нейродегенеративных нарушений низкая')
-        st.write('Вероятность достоверности прогноза:   ', y_pred_diag_proba*100)
-    elif y_pred_diag=='mci':
-        st.warning('''вероятно у пациента имеется когнитивное снижение, но оно не достигает деменции, 
-                   но есть риск развития, проведите повторное исследование через 3 месяца''')
-        st.write('Вероятность достоверности прогноза:   ', y_pred_diag_proba*100)
-    elif y_pred_diag=='parkinson':
-        st.warning('нейрокогнитивный профиль типичен для пациентов с Болезнью Паркинсона')
-        st.write('Вероятность достоверности прогноза:   ', y_pred_diag_proba*100)
-    elif y_pred_diag=='dementia':
-        st.error('У пациента когнитивные нарушения соответствующие деменции')
-        st.write('Вероятность достоверности прогноза:   ', y_pred_diag_proba*100)
+    #if y_pred_diag=='normal':
+    #    st.write('вероятность нейродегенеративных нарушений низкая')
+    #    st.write('Вероятность достоверности прогноза:   ', y_pred_diag_proba*100)
+    #elif y_pred_diag=='mci':
+    #    st.warning('''вероятно у пациента имеется когнитивное снижение, но оно не достигает деменции, 
+    #               но есть риск развития, проведите повторное исследование через 3 месяца''')
+    #    st.write('Вероятность достоверности прогноза:   ', y_pred_diag_proba*100)
+    #elif y_pred_diag=='parkinson':
+    #    st.warning('нейрокогнитивный профиль типичен для пациентов с Болезнью Паркинсона')
+    #    st.write('Вероятность достоверности прогноза:   ', y_pred_diag_proba*100)
+    #elif y_pred_diag=='dementia':
+    #    st.error('У пациента когнитивные нарушения соответствующие деменции')
+    #    st.write('Вероятность достоверности прогноза:   ', y_pred_diag_proba*100)
         
   
     
@@ -393,14 +404,14 @@ try:
             assement_dam=st.selectbox('что подходит лучше', ['нет ответа','есть повреждение мозга', 'нет повреждения мозга'],index=0)
 
 #оценка диагноза
-        st.subheader('Оцените результаты предсказания деменции', divider='green')
-        assement_dig=st.radio('согласны?',  ['нет ответа','да',  'нет'], key=3, index=0)
-        if assement_dig=='нет':
-            assement_dig=st.selectbox('что подходит лучше', ['нет ответа','нет нарушений', 
-                                                             'Болезнь Паркинсона',
-                                                             'Умеренные когнитивные нарушения (MCI)',
-                                                             'Деменция',
-                                                             'Другое'],index=0)
+        #st.subheader('Оцените результаты предсказания деменции', divider='green')
+        #assement_dig=st.radio('согласны?',  ['нет ответа','да',  'нет'], key=3, index=0)
+        #if assement_dig=='нет':
+        #    assement_dig=st.selectbox('что подходит лучше', ['нет ответа','нет нарушений', 
+        #                                                     'Болезнь Паркинсона',
+        #                                                     'Умеренные когнитивные нарушения (MCI)',
+        #                                                     'Деменция',
+        #                                                     'Другое'],index=0)
         
         result()
 
